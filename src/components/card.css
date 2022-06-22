@@ -1,0 +1,11 @@
+.crd{
+    cursor: pointer;
+    background-image: linear-gradient(to bottom right,rgba(119, 151, 180, 0.897),rgb(176, 241, 224));
+}
+h2{
+    font-family: cursive;
+}
+img{
+    width: 200px;
+    height: 200px;
+}
