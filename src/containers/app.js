@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
+import React, {useState,useEffect } from 'react';
 import Cardarray from '../components/cardarray';
 import Searchbox from '../components/searchbox';
 import Scroll from '../components/scroll'
 import './App.css'
 
-class App extends Component{
-    constructor(){
-        super()
-        this.state={
-            robots : [],
-            searchfield : ''
-        }
-    }
-    onsearchange=(event)=>{
-        this.setState({
-            searchfield: event.target.value
-        })
-   
-    }
-    componentDidMount(){
+function App (){
+     const [robots,setRobots]=useState([])
+     const [ searchfield,setSearchfield]=useState('')
+    
+
+     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(response=>{
             return response.json()
         })
         .then(users=>{
-            this.setState({robots : users})
+            setRobots(users)
         })
-    }
+     }, [])
 
-    render(){
-        const{robots,searchfield}=this.state
-        const filteredrobos=robots.filter(robos=>{
+    //  const onsearchange=(event)=>{
+    //     setSearchfield(event.target.value)
+    //  }
+     
+    const filteredrobos=robots.filter(robos=>{
             return robos.name.toLowerCase().includes(searchfield.toLowerCase())
         })
         return (!robots.length)?
@@ -38,7 +31,7 @@ class App extends Component{
         :(
                 <div className='tc'>
                 <h1 className='f1'>RoboFriends</h1>
-                <Searchbox searchange = {this.onsearchange} />
+                <Searchbox searchange = {(event)=>setSearchfield(event.target.value)} />
                 <Scroll>
                 <Cardarray robots={filteredrobos}/>
                 </Scroll>
@@ -46,7 +39,7 @@ class App extends Component{
             ) 
         
  
-}
+
 }
 
 export default App
