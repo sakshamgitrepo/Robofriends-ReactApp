@@ -5,8 +5,8 @@ const Cardarray=({robots})=> {
     return(
         <div>
             {
-                robots.map((user,i)=>{
-                  return  <Card key={i} names = {robots[i].name } id = {robots[i].id} email = {robots[i].email}/> 
+                robots.map((robot)=>{
+                  return  <Card key={robot.id} robot={robot}/> 
                 })
             }
         </div>
